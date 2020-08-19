@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="user"
+            type="com.example.githubapp.models.UserApiResponse" />
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/user_iv_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="top"
+            android:layout_margin="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:textSize="18dp"
+            android:text="@{user.name}"
+            app:layout_constraintLeft_toRightOf="@id/user_iv_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user_tv_created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:textSize="18dp"
+            android:text="@{user.created_at.toString()}"
+            app:layout_constraintLeft_toRightOf="@id/user_iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/user_tv_name" />
+
+        <TextView
+            android:id="@+id/user_tv_updated_at"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:textSize="18dp"
+            android:text="@{user.updated_at.toString()}"
+            app:layout_constraintLeft_toRightOf="@id/user_iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/user_tv_created_at" />
+
+        <TextView
+            android:id="@+id/user_tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:text="@{user.location}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_iv_avatar" />
+
+        <TextView
+            android:id="@+id/user_tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:text="@{user.email}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_tv_location" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GitHubApp</string>
+    <string name="user_no_items">no user</string>
+    <string name="user_search_hint">Enter your query here</string>
+    <string name="user_no_city">no city</string>
+    <string name="search_btm_activity">Search</string>
+</resources>
