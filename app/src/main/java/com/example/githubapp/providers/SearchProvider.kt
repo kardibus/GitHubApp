@@ -2,25 +2,32 @@ package com.example.githubapp.providers
 
 import android.content.Context
 import android.widget.Toast
-import com.example.githubapp.api.SearchRepositoryProvider
+import com.example.githubapp.api.interfaces.Api
+import com.example.githubapp.di.interfaces.DaggerSearchComponent
+import com.example.githubapp.di.interfaces.SearchComponent
 import com.example.githubapp.models.Result
 import com.example.githubapp.presenters.SearchPresenter
-import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
 import com.example.githubapp.providers.networkCheckIsOnline.component.EthernetComponent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import javax.inject.Inject
 
 class SearchProvider(var presenter:SearchPresenter) {
     private val TAG: String = SearchProvider::class.java.simpleName
 
     lateinit var ethernetComponent: EthernetComponent
+    lateinit var searchComponent: SearchComponent
+    @Inject
+    lateinit var api: Api
 
     fun loadUsers(login:String,page:Int,context:Context,boolean: Boolean){
 
-
         if(boolean) {
-            val repository = SearchRepositoryProvider.provideAllApiResponse()
-                .usersList(login = login, page = page).observeOn(AndroidSchedulers.mainThread())
+            searchComponent = DaggerSearchComponent.builder().build()
+
+           val repository = searchComponent.retrofitApi()
+               .getUsersList(login=login,page=page)
+               .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe({
                     val userList: ArrayList<Result> = ArrayList()
                     userList.add(it)

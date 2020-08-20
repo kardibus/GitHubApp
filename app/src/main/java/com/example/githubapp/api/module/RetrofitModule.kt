@@ -1,6 +1,6 @@
-package com.example.githubapp.di.module
+package com.example.githubapp.api.module
 
-import com.example.githubapp.api.Api
+import com.example.githubapp.api.interfaces.Api
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitModule {
 
     @Provides
-    fun usersApi(retrofit: Retrofit):Api{
+    fun usersApi(retrofit: Retrofit): Api {
       return retrofit.create(Api::class.java)
     }
 
@@ -26,4 +26,6 @@ class RetrofitModule {
     fun gsonConverterFactory(): GsonConverterFactory{
         return GsonConverterFactory.create()
     }
+
+
 }

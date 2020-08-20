@@ -1,12 +1,14 @@
-package com.example.githubapp.api
+package com.example.githubapp.api.interfaces
 
 
 import com.example.githubapp.models.Result
 import com.example.githubapp.models.UserApiResponse
+import dagger.Provides
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 import rx.Observable
+
 
 interface Api {
 
