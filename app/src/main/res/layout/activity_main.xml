@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="@string/search_btm_activity"
-        android:gravity="left"
-        />
+        android:gravity="left" />
 
 </FrameLayout>
 
@@ -41,7 +40,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_user"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/txt_user_no_item"
@@ -72,11 +71,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"></TextView>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:layout_weight="50"
-                android:text="back"></Button>
+                android:text="back"
+                style="@style/Widget.AppCompat.Button.Small" />
 
             <Button
                 android:id="@+id/user_dtn_more"
@@ -98,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:layout_weight="50"
-                android:text="more"></Button>
+                android:text="more"
+                style="@style/Widget.AppCompat.Button.Small" />
 
 
         </LinearLayout>

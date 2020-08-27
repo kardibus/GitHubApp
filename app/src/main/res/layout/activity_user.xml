@@ -1,79 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="user"
             type="com.example.githubapp.models.UserApiResponse" />
     </data>
-    
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/user_iv_avatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_margin="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:adjustViewBounds="true"
+            minHeight="200dp"
+            tools:src="@drawable/ic_launcher_background"/>
 
-        <TextView
-            android:id="@+id/user_tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_margin="10dp"
-            android:textSize="18dp"
-            android:text="@{user.name}"
-            app:layout_constraintLeft_toRightOf="@id/user_iv_avatar"
-            app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
-        <TextView
-            android:id="@+id/user_tv_created_at"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:textSize="18dp"
-            android:text="@{user.created_at.toString()}"
-            app:layout_constraintLeft_toRightOf="@id/user_iv_avatar"
-            app:layout_constraintTop_toTopOf="@id/user_tv_name" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/user_tv_updated_at"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:textSize="18dp"
-            android:text="@{user.updated_at.toString()}"
-            app:layout_constraintLeft_toRightOf="@id/user_iv_avatar"
-            app:layout_constraintTop_toTopOf="@id/user_tv_created_at" />
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    style="@style/icon"
+                    android:src="@drawable/baseline_sd_card_black_48"/>
 
-        <TextView
-            android:id="@+id/user_tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:textSize="18dp"
-            android:text="@{user.location}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_iv_avatar" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.public_repos}" />
 
-        <TextView
-            android:id="@+id/user_tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:textSize="18dp"
-            android:text="@{user.email}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_tv_location" />
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    style="@style/icon"
+                    android:src="@drawable/baseline_people_black_48"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.followers}" />
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    style="@style/icon"
+                    android:src="@drawable/baseline_people_outline_black_48"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.following}" />
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    style="@style/icon"
+                    android:src="@drawable/baseline_event_note_black_18dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.public_gists}" />
+            </LinearLayout>
+        </FrameLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorStringInfo">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/user_tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="@dimen/user_name"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.name}" />
+
+
+                <TextView
+                    android:id="@+id/user_tv_created_at"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_tv_name"
+                    android:textSize="@dimen/user_common_text"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.created_at.toString()}" />
+
+
+                <TextView
+                    android:id="@+id/user_tv_updated_at"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_tv_created_at"
+                    android:textSize="@dimen/user_common_text"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.updated_at.toString()}" />
+
+                <TextView
+                    android:id="@+id/user_tv_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_tv_updated_at"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.location}" />
+
+
+                <TextView
+                    android:id="@+id/user_tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_tv_location"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{user.email}" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </layout>

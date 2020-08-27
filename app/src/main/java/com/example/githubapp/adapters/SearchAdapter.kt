@@ -10,6 +10,7 @@ import com.example.githubapp.R
 import com.example.githubapp.models.UsersApiResponse
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.call_user.*
 
 class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mSourceList: ArrayList<UsersApiResponse> = ArrayList()
@@ -59,7 +60,7 @@ class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Ad
 
         private var mCivAvatar: CircleImageView = itemView.findViewById(R.id.user_civ_avatar)
         private var mTxtUsername: TextView = itemView.findViewById(R.id.user_txt_username)
-        private var mTxtCity: TextView = itemView.findViewById(R.id.user_txt_city)
+        private var mTxtUrl: TextView = itemView.findViewById(R.id.user_txt_url)
         private var mImgOnline: View = itemView.findViewById(R.id.user_img_online)
 
         @SuppressLint("SetTextI18n")
@@ -73,8 +74,9 @@ class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Ad
             }
 
             mTxtUsername.text = "${usersModel.login}"
+            mTxtUrl.text="${usersModel.html_url}"
 
-            mImgOnline.setOnClickListener{clickListener(usersModel)}
+            itemView.setOnClickListener{clickListener(usersModel)}
 
         }
     }

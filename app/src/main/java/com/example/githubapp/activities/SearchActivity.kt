@@ -20,6 +20,7 @@ import com.example.githubapp.providers.networkCheckIsOnline.component.EthernetCo
 import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
 import com.example.githubapp.views.SearchView
 import com.github.rahatarmanahmed.cpv.CircularProgressView
+import kotlinx.android.synthetic.main.call_user.*
 
 class SearchActivity : MvpActivity(),SearchView {
 
@@ -52,10 +53,15 @@ class SearchActivity : MvpActivity(),SearchView {
             .contextModule(ContextModule(this))
             .build()
 
-        mBtmSearch.setOnClickListener { searchPresenter.loadSearch(mTxtSearch.text.toString(),page = page,context = this,boolean = ethernetComponent.check().isOnline())  }
+            mBtmSearch.setOnClickListener {
+                searchPresenter.loadSearch(
+                    mTxtSearch.text.toString(),
+                    page = page,
+                    context = this,
+                    boolean = ethernetComponent.check().isOnline())
+        }
 
-
-        mAdapter = SearchAdapter({partItem : UsersApiResponse -> onUserClick(partItem)})
+        mAdapter = SearchAdapter { partItem: UsersApiResponse -> onUserClick(partItem) }
 
         mRvFriends.adapter = mAdapter
         mRvFriends.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
@@ -92,20 +98,32 @@ class SearchActivity : MvpActivity(),SearchView {
     private fun onUserClick(userApiResponse: UsersApiResponse) {
         val showActivity = Intent(this,UserActivity::class.java)
         showActivity.putExtra("name", userApiResponse.login)
-        
         startActivity(showActivity)
     }
 
     fun more(view: View){
-        ++page
-        searchPresenter.loadSearch(mTxtSearch.text.toString(),page = page,context = this,boolean = ethernetComponent.check().isOnline())
-        mAdapter.notifyDataSetChanged()
+        if(!mTxtSearch.text.isEmpty()){
+            ++page
+            searchPresenter.loadSearch(
+                mTxtSearch.text.toString(),
+                page = page,
+                context = this,
+                boolean = ethernetComponent.check().isOnline()
+            )
+            mAdapter.notifyDataSetChanged()
+        }
     }
 
     fun back(view: View){
-        --page
-        searchPresenter.loadSearch(mTxtSearch.text.toString(),page = page,context = this,boolean = ethernetComponent.check().isOnline())
-        mAdapter.notifyDataSetChanged()
+        if(!mTxtSearch.text.isEmpty()){
+            --page
+            searchPresenter.loadSearch(
+                mTxtSearch.text.toString(),
+                page = page,
+                context = this,
+                boolean = ethernetComponent.check().isOnline())
+        }
+            mAdapter.notifyDataSetChanged()
+        }
     }
 
-}
