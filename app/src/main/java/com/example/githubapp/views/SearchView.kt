@@ -14,5 +14,4 @@ interface SearchView:MvpView {
     fun setupFriendsList(userList: ArrayList<UsersApiResponse>)
     fun startLoading()
     fun endLoading()
-
 }

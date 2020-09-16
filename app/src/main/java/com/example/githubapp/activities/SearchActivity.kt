@@ -7,12 +7,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.githubapp.R
 import com.example.githubapp.adapters.SearchAdapter
+import com.example.githubapp.adapters.SearchAdapterClicks
+import com.example.githubapp.databinding.ActivityUserBinding
 import com.example.githubapp.models.UsersApiResponse
 import com.example.githubapp.presenters.SearchPresenter
 import com.example.githubapp.providers.networkCheckIsOnline.component.DaggerEthernetComponent
@@ -20,6 +23,7 @@ import com.example.githubapp.providers.networkCheckIsOnline.component.EthernetCo
 import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
 import com.example.githubapp.views.SearchView
 import com.github.rahatarmanahmed.cpv.CircularProgressView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.call_user.*
 
 class SearchActivity : MvpActivity(),SearchView {
@@ -28,6 +32,8 @@ class SearchActivity : MvpActivity(),SearchView {
     lateinit var searchPresenter: SearchPresenter
 
     lateinit var ethernetComponent: EthernetComponent
+
+
 
     private lateinit var mRvFriends: RecyclerView
     private lateinit var mTxtNoItems: TextView
@@ -61,9 +67,15 @@ class SearchActivity : MvpActivity(),SearchView {
                     boolean = ethernetComponent.check().isOnline())
         }
 
-        mAdapter = SearchAdapter { partItem: UsersApiResponse -> onUserClick(partItem) }
+        mAdapter = SearchAdapter()
 
-        mRvFriends.adapter = mAdapter
+        mAdapter.searchAdapterClicks = object: SearchAdapterClicks{
+            override fun onItemClick(model: UsersApiResponse) {
+                     onUserClick(userApiResponse = model)
+            }
+        }
+
+        recycler_user.adapter = mAdapter
         mRvFriends.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
         mRvFriends.setHasFixedSize(true)
     }

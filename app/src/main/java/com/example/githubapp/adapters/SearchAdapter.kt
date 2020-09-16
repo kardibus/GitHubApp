@@ -10,11 +10,16 @@ import com.example.githubapp.R
 import com.example.githubapp.models.UsersApiResponse
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.call_user.*
 
-class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+interface SearchAdapterClicks{
+   fun onItemClick(model:UsersApiResponse)
+}
+
+class SearchAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mSourceList: ArrayList<UsersApiResponse> = ArrayList()
     private var mUsersList: ArrayList<UsersApiResponse> = ArrayList()
+
+    var searchAdapterClicks:SearchAdapterClicks? = null
 
     fun setupUsers(userList: ArrayList<UsersApiResponse>){
         mSourceList.clear()
@@ -49,7 +54,8 @@ class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Ad
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (holder is UsersViewHolder) {
-            holder.bind(usersModel = mUsersList[position],clickListener = clickListener)
+            holder.bind(usersModel = mUsersList[position])
+            holder.itemView.setOnClickListener{searchAdapterClicks?.onItemClick(mUsersList[position])}
         }
     }
 
@@ -64,9 +70,7 @@ class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Ad
         private var mImgOnline: View = itemView.findViewById(R.id.user_img_online)
 
         @SuppressLint("SetTextI18n")
-        fun bind(
-            usersModel: UsersApiResponse,
-            clickListener: (UsersApiResponse) -> Unit) {
+        fun bind(usersModel: UsersApiResponse) {
 
             usersModel.avatar_url?.let { url ->
                 Picasso.get().load(url)
@@ -75,9 +79,6 @@ class SearchAdapter(val clickListener: (UsersApiResponse)->Unit):RecyclerView.Ad
 
             mTxtUsername.text = "${usersModel.login}"
             mTxtUrl.text="${usersModel.html_url}"
-
-            itemView.setOnClickListener{clickListener(usersModel)}
-
         }
     }
 }

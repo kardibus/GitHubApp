@@ -7,8 +7,5 @@ import com.example.githubapp.models.UserApiResponse
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface UserView:MvpView {
-
-
     fun setupUser(userList: UserApiResponse)
-
 }
