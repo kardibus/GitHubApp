@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="searchUser"
+            type="com.example.githubapp.models.UsersApiResponse" />
+    </data>
+
 <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -29,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="@{searchUser.login}"/>
 
             <TextView
                 android:id="@+id/user_txt_url"
@@ -55,3 +64,4 @@
         android:layout_height="1dp"
         android:background="@drawable/separator"/>
 </FrameLayout>
+</layout>

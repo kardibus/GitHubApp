@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpActivity
@@ -15,7 +14,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.githubapp.R
 import com.example.githubapp.adapters.SearchAdapter
 import com.example.githubapp.adapters.SearchAdapterClicks
-import com.example.githubapp.databinding.ActivityUserBinding
 import com.example.githubapp.models.UsersApiResponse
 import com.example.githubapp.presenters.SearchPresenter
 import com.example.githubapp.providers.networkCheckIsOnline.component.DaggerEthernetComponent
@@ -24,7 +22,6 @@ import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
 import com.example.githubapp.views.SearchView
 import com.github.rahatarmanahmed.cpv.CircularProgressView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.call_user.*
 
 class SearchActivity : MvpActivity(),SearchView {
 
