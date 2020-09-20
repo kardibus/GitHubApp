@@ -14,11 +14,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.githubapp.R
 import com.example.githubapp.adapters.SearchAdapter
 import com.example.githubapp.adapters.SearchAdapterClicks
+import com.example.githubapp.di.interfaces.DaggerSearchComponent
+import com.example.githubapp.di.interfaces.SearchComponent
+import com.example.githubapp.di.module.ContextModule
 import com.example.githubapp.models.UsersApiResponse
 import com.example.githubapp.presenters.SearchPresenter
-import com.example.githubapp.providers.networkCheckIsOnline.component.DaggerEthernetComponent
-import com.example.githubapp.providers.networkCheckIsOnline.component.EthernetComponent
-import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
 import com.example.githubapp.views.SearchView
 import com.github.rahatarmanahmed.cpv.CircularProgressView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,7 +28,7 @@ class SearchActivity : MvpActivity(),SearchView {
     @InjectPresenter
     lateinit var searchPresenter: SearchPresenter
 
-    lateinit var ethernetComponent: EthernetComponent
+    lateinit var searchComponent: SearchComponent
 
 
 
@@ -51,7 +51,7 @@ class SearchActivity : MvpActivity(),SearchView {
         mBtmSearch = findViewById(R.id.serarch_btm_user)
         mTxtSearch = findViewById(R.id.txt_user_search)
 
-        ethernetComponent = DaggerEthernetComponent
+        searchComponent = DaggerSearchComponent
             .builder()
             .contextModule(ContextModule(this))
             .build()
@@ -61,8 +61,10 @@ class SearchActivity : MvpActivity(),SearchView {
                     mTxtSearch.text.toString(),
                     page = page,
                     context = this,
-                    boolean = ethernetComponent.check().isOnline())
+                    boolean = searchComponent.check().isOnline())
         }
+
+
 
         mAdapter = SearchAdapter()
 
@@ -117,7 +119,7 @@ class SearchActivity : MvpActivity(),SearchView {
                 mTxtSearch.text.toString(),
                 page = page,
                 context = this,
-                boolean = ethernetComponent.check().isOnline()
+                boolean = searchComponent.check().isOnline()
             )
             mAdapter.notifyDataSetChanged()
         }
@@ -130,7 +132,7 @@ class SearchActivity : MvpActivity(),SearchView {
                 mTxtSearch.text.toString(),
                 page = page,
                 context = this,
-                boolean = ethernetComponent.check().isOnline())
+                boolean = searchComponent.check().isOnline())
         }
             mAdapter.notifyDataSetChanged()
         }

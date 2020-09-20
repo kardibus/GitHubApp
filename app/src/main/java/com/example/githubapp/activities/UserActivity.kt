@@ -7,11 +7,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.githubapp.BR
 import com.example.githubapp.R
 import com.example.githubapp.databinding.ActivityUserBinding
+import com.example.githubapp.di.interfaces.DaggerSearchComponent
+import com.example.githubapp.di.interfaces.SearchComponent
+import com.example.githubapp.di.module.ContextModule
 import com.example.githubapp.models.UserApiResponse
 import com.example.githubapp.presenters.UserPresenter
-import com.example.githubapp.providers.networkCheckIsOnline.component.DaggerEthernetComponent
-import com.example.githubapp.providers.networkCheckIsOnline.component.EthernetComponent
-import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
 import com.example.githubapp.views.UserView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user.*
@@ -22,7 +22,7 @@ class UserActivity: MvpActivity(),UserView {
 
     lateinit var binding:ActivityUserBinding
 
-    lateinit var ethernetComponent:EthernetComponent
+    lateinit var searchComponent: SearchComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +33,12 @@ class UserActivity: MvpActivity(),UserView {
 
         var name = intentStartedThisActivity.getStringExtra("name")
 
-        ethernetComponent = DaggerEthernetComponent
+        searchComponent = DaggerSearchComponent
             .builder()
             .contextModule(ContextModule(this))
             .build()
 
-           userPresenter.loadUser(name,this,ethernetComponent.check().isOnline())
+           userPresenter.loadUser(name,this,searchComponent.check().isOnline())
 
         }
 

@@ -5,9 +5,9 @@ import android.widget.Toast
 import com.example.githubapp.api.interfaces.Api
 import com.example.githubapp.di.interfaces.DaggerSearchComponent
 import com.example.githubapp.di.interfaces.SearchComponent
+import com.example.githubapp.di.module.ContextModule
 import com.example.githubapp.models.Result
 import com.example.githubapp.presenters.SearchPresenter
-import com.example.githubapp.providers.networkCheckIsOnline.component.EthernetComponent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import javax.inject.Inject
@@ -15,7 +15,6 @@ import javax.inject.Inject
 class SearchProvider(var presenter:SearchPresenter) {
     private val TAG: String = SearchProvider::class.java.simpleName
 
-    lateinit var ethernetComponent: EthernetComponent
     lateinit var searchComponent: SearchComponent
     @Inject
     lateinit var api: Api
@@ -23,7 +22,7 @@ class SearchProvider(var presenter:SearchPresenter) {
     fun loadUsers(login:String,page:Int,context:Context,boolean: Boolean){
 
         if(boolean) {
-            searchComponent = DaggerSearchComponent.builder().build()
+            searchComponent = DaggerSearchComponent.builder().contextModule(ContextModule(context=context)).build()
 
            val repository = searchComponent.retrofitApi()
                .getUsersList(login=login,page=page)

@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.Toast
 import com.example.githubapp.di.interfaces.DaggerSearchComponent
 import com.example.githubapp.di.interfaces.SearchComponent
+import com.example.githubapp.di.module.ContextModule
 import com.example.githubapp.models.UserApiResponse
 import com.example.githubapp.presenters.UserPresenter
 import rx.android.schedulers.AndroidSchedulers
@@ -17,7 +18,7 @@ class UserProvider(var presenter: UserPresenter) {
     fun getUser(login: String,context: Context,boolean: Boolean){
 
         if (boolean) {
-            searchComponent = DaggerSearchComponent.builder().build()
+            searchComponent = DaggerSearchComponent.builder().contextModule(ContextModule(context = context)).build()
 
             val repository = searchComponent.retrofitApi()
                 .getUser(login=login).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe({

@@ -1,16 +1,17 @@
-package com.example.githubapp.providers.networkCheckIsOnline.module
+package com.example.githubapp.di.networkCheckIsOnline.module
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.githubapp.providers.networkCheckIsOnline.module.ContextModule
+import com.example.githubapp.di.module.ContextModule
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
+import javax.inject.Named
 
 @Module(includes = [ContextModule::class])
 class CheckEthernetModule{
 
-     var context:Context
+    private var context:Context
 
     @Inject
     constructor(context: Context){

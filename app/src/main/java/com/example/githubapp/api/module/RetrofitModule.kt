@@ -1,11 +1,13 @@
 package com.example.githubapp.api.module
 
 import com.example.githubapp.api.interfaces.Api
+import com.example.githubapp.di.interfaces.SearchScope
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 @Module
 class RetrofitModule {
@@ -15,6 +17,7 @@ class RetrofitModule {
       return retrofit.create(Api::class.java)
     }
 
+    @SearchScope
     @Provides
     fun retrofit(gsonConverterFactory: GsonConverterFactory):Retrofit{
         return Retrofit.Builder()
