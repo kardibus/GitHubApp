@@ -10,14 +10,14 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/txt_user_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="100dp"
         android:layout_gravity="left"
         android:hint="@string/user_search_hint">
-    </EditText>
+    </com.google.android.material.textfield.TextInputEditText>
 
     <Button
         android:id="@+id/serarch_btm_user"
